@@ -9,6 +9,9 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [ano_bisiesto]
 
     steps:
     - name: Checkout repository
@@ -20,10 +23,10 @@ jobs:
         sudo apt-get install -y build-essential lcov
 
     - name: Build and run tests
-      run: /ano_bisiesto/make test
+      run: make -C ${{ matrix.project }} tests
 
     - name: Generate coverage report
-      run: /ano_bisiesto/make coverage-report
+      run: make -C ${{ matrix.project }} coverage-report
 
     # SonarQube
     #- name: SonarQube Scan
