@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../src/func.c"
+#include "../src/func.h"
 
 /// @brief Test para verificar que un año divisible por 400 es bisiesto
 void test_bisiesto_divisible_por_400() {
