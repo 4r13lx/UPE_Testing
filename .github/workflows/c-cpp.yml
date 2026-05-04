@@ -20,10 +20,10 @@ jobs:
         sudo apt-get install -y build-essential lcov
 
     - name: Build and run tests
-      run: make test
+      run: /ano_bisiesto/make test
 
     - name: Generate coverage report
-      run: make coverage-report
+      run: /ano_bisiesto/make coverage-report
 
     # SonarQube
     #- name: SonarQube Scan
