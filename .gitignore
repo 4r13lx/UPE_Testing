@@ -57,6 +57,7 @@ Module.symvers
 !*/tests/*.c
 Mkfile.old
 dkms.conf
+*/build/
 
 # debug information files
 *.dwo
