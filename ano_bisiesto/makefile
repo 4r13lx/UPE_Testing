@@ -49,7 +49,7 @@ coverage: clean $(TEST_BIN)
 # Reporte coverage
 coverage-report: coverage
 	lcov --capture --directory . --output-file coverage.info
-	lcov --remove coverage.info '/usr/*' --output-file coverage.info
+	lcov --remove coverage.info '/usr/*' --output-file coverage.info --ignore-errors unused
 	genhtml coverage.info --output-directory coverage-report
 
 # Limpieza
