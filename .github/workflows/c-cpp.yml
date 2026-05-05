@@ -8,35 +8,65 @@ on:
 
 jobs:
   build-test:
+    # Use the latest Ubuntu runner
     runs-on: ubuntu-latest
+
+    # Define a matrix to run the job for each project
     strategy:
       matrix:
-        project: [ano_bisiesto]
+        project: 
+          - ano_bisiesto
 
+    # Set the working directory for all steps in this job
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+
+    # Define the steps to build, test, and analyze the project
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    # Set up C/C++ environment
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential lcov
+        sudo apt-get install -y build-essential lcov unzip curl
 
-    - name: Build and run tests
-      run: make -C ${{ matrix.project }} tests
+    # Download and set up SonarQube Scanner
+    - name: Download Sonar build-wrapper
+      run: |
+        curl -sSLo build-wrapper.zip https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
+        unzip build-wrapper.zip
 
+    # Build the project with build-wrapper to capture compilation data
+    - name: Build and Test with wrapper
+      run: |
+        ../build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
+        --out-dir bw-output \
+        make clean all
+
+    # Generate coverage data
     - name: Generate coverage report
-      run: make -C ${{ matrix.project }} coverage-report
+      run: make coverage-report
 
-    # SonarQube
-    #- name: SonarQube Scan
-    #  uses: SonarSource/sonarqube-scan-action@v8.0.0
-    #  env:
-    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    #  with:
-    #    args: >
-    #      -Dsonar.projectKey=my-c-project
-    #      -Dsonar.sources=.
-    #      -Dsonar.cfamily.build-wrapper-output=bw-output
-    #      -Dsonar.coverageReportPaths=coverage.info
+    # Sonar scan
+    - name: SonarQube Scan
+      uses: SonarSource/sonarqube-scan-action@v8.0.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      with:
+        args: >
+          -Dsonar.projectKey=${{ matrix.project }}
+          -Dsonar.sources=.
+          -Dsonar.tests=.
+          -Dsonar.cfamily.build-wrapper-output=bw-output
+          -Dsonar.cfamily.gcov.reportsPath=.
+
+    # Quality Gate
+    - name: SonarQube Quality Gate
+      uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+      timeout-minutes: 5
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
