@@ -46,7 +46,8 @@ jobs:
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
         --out-dir bw-output \
         ls -la
-        make clean all
+        make clean build
+        make clean test
 
     - name: Run tests
       run: |
