@@ -70,7 +70,7 @@ jobs:
           -Dsonar.tests=tests
           -Dsonar.cfamily.compile-commands=bw-output/compile_commands.json
           -Dsonar.cfamily.gcov.reportsPath=.
-          -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,${{ matrix.project }}/tests/**
+          -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,tests/**
 
     # Quality Gate
     - name: SonarQube Quality Gate
