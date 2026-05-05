@@ -81,7 +81,7 @@ jobs:
           -Dsonar.organization=unarix
           -Dsonar.sources=.
           -Dsonar.tests=tests
-          -Dsonar.cfamily.build-wrapper-output=bw-output
+          -Dsonar.cfamily.build-wrapper-output=${{ matrix.project }}/bw-output
           -Dsonar.cfamily.gcov.reportsPath=.
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,tests/**
 
