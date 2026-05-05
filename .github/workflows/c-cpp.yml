@@ -26,12 +26,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Set up C/C++ environment
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y lcov unzip curl
-
     # Cache build artifacts to speed up subsequent runs
     - name: Cache Sonar wrapper
       id: cache-wrapper
@@ -39,6 +33,12 @@ jobs:
       with:
         path: build-wrapper-linux-x86
         key: sonar-wrapper-v1
+
+    # Set up C/C++ environment
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lcov unzip curl
         
     # Download and set up SonarQube Scanner
     - name: Download Sonar build-wrapper
@@ -86,9 +86,10 @@ jobs:
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,tests/**
 
     - name: Debug Sonar Report
-      run: cat ${{ matrix.project }}/.scannerwork/report-task.txt
-           cat .scannerwork/report-task.txt
-           ls -la
+      run: |
+        cat ${{ matrix.project }}/.scannerwork/report-task.txt
+        cat .scannerwork/report-task.txt
+        ls -la
 
     # Quality Gate
     - name: SonarQube Quality Gate
