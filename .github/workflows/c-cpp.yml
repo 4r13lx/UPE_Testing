@@ -30,10 +30,19 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential lcov unzip curl
+        sudo apt-get install -y lcov unzip curl
 
+    # Cache build artifacts to speed up subsequent runs
+    - name: Cache Sonar wrapper
+      id: cache-wrapper
+      uses: actions/cache@v4
+      with:
+        path: build-wrapper-linux-x86
+        key: sonar-wrapper-v1
+        
     # Download and set up SonarQube Scanner
     - name: Download Sonar build-wrapper
+      if: steps.cache-wrapper.outputs.cache-hit != 'true'
       run: |
         curl -sSLo build-wrapper.zip https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
         unzip build-wrapper.zip
@@ -45,9 +54,8 @@ jobs:
         mkdir bw-output
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
           --out-dir bw-output \
-          /usr/bin/gcc -c $(find src tests -name "*.c") -Isrc -Itests
-        echo "Contenido del dump:"
-        cat bw-output/build-wrapper-dump.json
+        make clean build
+# /usr/bin/gcc -c $(find src tests -name "*.c") -Isrc -Itests
 
     - name: Run tests
       run: |
