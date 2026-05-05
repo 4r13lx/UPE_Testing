@@ -68,7 +68,7 @@ jobs:
           -Dsonar.organization=unarix
           -Dsonar.sources=.
           -Dsonar.tests=tests
-          -Dsonar.cfamily.compile-commands=bw-output/compile_commands.json
+          -Dsonar.cfamily.build-wrapper-output=bw-output
           -Dsonar.cfamily.gcov.reportsPath=.
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,tests/**
 
