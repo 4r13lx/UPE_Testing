@@ -77,6 +77,7 @@ jobs:
           -Dsonar.cfamily.build-wrapper-output=${{ matrix.project }}/bw-output
           -Dsonar.cfamily.gcov.reportsPath=.
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,tests/**
+          -Dsonar.qualitygate.wait=true
 
     # Quality Gate
     - name: SonarQube Quality Gate
@@ -85,4 +86,5 @@ jobs:
       with:
         scanMetadataReportFile: ${{ matrix.project }}/.scannerwork/report-task.txt
       env:
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
