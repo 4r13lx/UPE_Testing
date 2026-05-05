@@ -50,7 +50,7 @@ jobs:
 
     # Generate coverage data
     - name: Generate coverage report
-      run: make -C ${{ matrix.project }} coverage-report
+      run: make coverage-report
 
     # Sonar scan
     - name: SonarQube Scan
