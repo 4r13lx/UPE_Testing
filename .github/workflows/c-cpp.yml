@@ -44,8 +44,9 @@ jobs:
     - name: Build and Test with wrapper
       run: |
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
-        --out-dir ${{ matrix.project }}bw-output \
-        make -C ${{ matrix.project }} clean test
+        --out-dir bw-output \
+        ls -la
+        make clean test
 
     # Generate coverage data
     - name: Generate coverage report
