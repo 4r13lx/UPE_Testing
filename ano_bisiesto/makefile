@@ -8,22 +8,24 @@ LDFLAGS =
 # Coverage
 COVERAGE_FLAGS = --coverage
 
-# Directorios
+# Directories
 SRC_DIR = src
 TEST_DIR = tests
-BUILD_DIR = build
+BUILD_DIR = bin
 
-# Archivos
+# Sources
 SRC = $(wildcard $(SRC_DIR)/*.c)
 TESTS = $(wildcard $(TEST_DIR)/*.c)
 
-# Binarios
+# -- Rules --
+
+# Binaries
 TEST_BIN = $(BUILD_DIR)/runTests
 
 # Default
 all: test
 
-# Crear carpeta build
+# Create build directory
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
@@ -31,10 +33,10 @@ $(BUILD_DIR):
 $(TEST_BIN): $(SRC) $(TESTS) | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
-# Alias para compatibilidad
+# Build
 build: $(TEST_BIN)
 
-# Ejecutar tests
+# Run tests
 test: $(TEST_BIN)
 	@echo "Running tests..."
 	@$(TEST_BIN)
@@ -46,14 +48,15 @@ coverage: clean $(TEST_BIN)
 	@echo "Running tests with coverage..."
 	@$(TEST_BIN)
 
-# Reporte coverage
+# Generate coverage report
 coverage-report: coverage
 	lcov --capture --directory . --output-file coverage.info
 	lcov --remove coverage.info '/usr/*' --output-file coverage.info --ignore-errors unused
 	genhtml coverage.info --output-directory coverage-report
 
-# Limpieza
+# Clean
 clean:
 	rm -rf $(BUILD_DIR) *.gcda *.gcno *.info coverage-report
 
+# Declare phony targets
 .PHONY: all build test coverage coverage-report clean
