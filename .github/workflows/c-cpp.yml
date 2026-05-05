@@ -43,13 +43,13 @@ jobs:
     # Build the project with build-wrapper to capture compilation data
     - name: Build and Test with wrapper
       run: |
-        $GITHUB_WORKSPACE/build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
-        --out-dir bw-output \
-        make clean test
+        ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
+        --out-dir ${{ matrix.project }}bw-output \
+        make -C ${{ matrix.project }} clean test
 
     # Generate coverage data
     - name: Generate coverage report
-      run: make coverage-report
+      run: make -C ${{ matrix.project }} coverage-report
 
     # Sonar scan
     - name: SonarQube Scan
