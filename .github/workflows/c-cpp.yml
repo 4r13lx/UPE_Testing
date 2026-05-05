@@ -75,7 +75,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       with:
-        # Set the base directory to the project folder so paths align
         projectBaseDir: ${{ matrix.project }}
         args: >
           -Dsonar.projectKey=${{ matrix.project }}
@@ -85,7 +84,9 @@ jobs:
           -Dsonar.cfamily.build-wrapper-output=${{ matrix.project }}/bw-output
           -Dsonar.cfamily.gcov.reportsPath=.
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,tests/**
-#          -Dsonar.qualitygate.wait=true
+
+    - name: Debug Sonar Report
+      run: cat ${{ matrix.project }}/.scannerwork/report-task.txt
 
     # Quality Gate
     - name: SonarQube Quality Gate
