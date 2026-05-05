@@ -87,9 +87,8 @@ jobs:
 
     - name: Debug Sonar Report
       run: |
-        cat ${{ matrix.project }}/.scannerwork/report-task.txt
-        cat .scannerwork/report-task.txt
         ls -la
+        cat .scannerwork/report-task.txt
 
     # Quality Gate
     - name: SonarQube Quality Gate
