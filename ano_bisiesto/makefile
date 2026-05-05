@@ -21,7 +21,7 @@ TESTS = $(wildcard $(TEST_DIR)/*.c)
 TEST_BIN = $(BUILD_DIR)/runTests
 
 # Default
-all: build
+all: test
 
 # Crear carpeta build
 $(BUILD_DIR):
