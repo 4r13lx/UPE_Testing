@@ -49,7 +49,10 @@ jobs:
         make clean all
 
     - name: Run tests
-      run: make test
+      run: |
+        make test
+        ls -la
+        cat bw-output/compile_commands.json
 
     # Generate coverage data
     - name: Generate coverage report
