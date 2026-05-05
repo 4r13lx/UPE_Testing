@@ -41,11 +41,13 @@ jobs:
     # Build the project with build-wrapper to capture compilation data
     - name: Build with wrapper
       run: |
+        rm -rf bw-output
+        mkdir bw-output
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
-        --out-dir bw-output \
-        ls -la
-        make clean all
-        make build
+          --out-dir bw-output \
+          /usr/bin/gcc -c $(find src tests -name "*.c") -Isrc -Itests
+        echo "Contenido del dump:"
+        cat bw-output/build-wrapper-dump.json
 
     - name: Run tests
       run: |
