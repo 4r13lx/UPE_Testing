@@ -42,7 +42,7 @@ jobs:
     # Build the project with build-wrapper to capture compilation data
     - name: Build and Test with wrapper
       run: |
-        ../build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
+        $GITHUB_WORKSPACE/build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
         --out-dir bw-output \
         make clean test
 
