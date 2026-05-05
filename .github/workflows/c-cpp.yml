@@ -81,12 +81,14 @@ jobs:
           -Dsonar.organization=unarix
           -Dsonar.sources=.
           -Dsonar.tests=tests
-          -Dsonar.cfamily.build-wrapper-output=${{ matrix.project }}/bw-output
+          -Dsonar.cfamily.build-wrapper-output=bw-output
           -Dsonar.cfamily.gcov.reportsPath=.
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,tests/**
 
     - name: Debug Sonar Report
       run: cat ${{ matrix.project }}/.scannerwork/report-task.txt
+           cat .scannerwork/report-task.txt
+           ls -la
 
     # Quality Gate
     - name: SonarQube Quality Gate
