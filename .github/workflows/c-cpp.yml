@@ -60,8 +60,8 @@ jobs:
         args: >
           -Dsonar.projectKey=${{ matrix.project }}
           -Dsonar.organization=unarix
-          -Dsonar.sources=src
-          -Dsonar.tests=tests
+          -Dsonar.sources=${{ matrix.project }}/src
+          -Dsonar.tests=${{ matrix.project }}/tests
           -Dsonar.cfamily.build-wrapper-output=bw-output
           -Dsonar.cfamily.gcov.reportsPath=.
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json
