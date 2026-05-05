@@ -59,6 +59,7 @@ jobs:
       with:
         args: >
           -Dsonar.projectKey=${{ matrix.project }}
+          -Dsonar.organization=unarix
           -Dsonar.sources=.
           -Dsonar.tests=.
           -Dsonar.cfamily.build-wrapper-output=bw-output
