@@ -42,8 +42,8 @@ jobs:
     - name: Build with wrapper
       run: |
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
-        --out-dir bw-output \
-        make clean all test
+        --out-dir bw-output gcc -c *.c \
+       # make clean all test
 
     - name: Run tests
       run: |
