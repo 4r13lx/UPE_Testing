@@ -49,8 +49,10 @@ jobs:
 
     - name: Run tests
       run: |
+        make test
         ls -la
         cat bw-output/compile_commands.json
+        cat bw-output/build-wrapper-dump.json
 
     # Generate coverage data
     - name: Generate coverage report
