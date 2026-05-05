@@ -38,6 +38,8 @@ jobs:
       run: |
         curl -sSLo build-wrapper.zip https://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
         unzip build-wrapper.zip
+        ls -la
+        ls -la build-wrapper-linux-x86
 
     # Build the project with build-wrapper to capture compilation data
     - name: Build and Test with wrapper
