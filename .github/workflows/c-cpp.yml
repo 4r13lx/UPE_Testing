@@ -96,6 +96,3 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         scanMetadataReportFile: ${{ matrix.project }}/.scannerwork/report-task.txt
-        args: >
-          -Dsonar.projectKey=${{ matrix.project }}
-          -Dsonar.organization=unarix
