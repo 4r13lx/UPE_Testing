@@ -43,11 +43,10 @@ jobs:
       run: |
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
         --out-dir bw-output \
-        make clean all
+        make clean all test
 
     - name: Run tests
       run: |
-        make build
         ls -la
         cat bw-output/compile_commands.json
 
@@ -62,13 +61,15 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       with:
+        # Set the base directory to the project folder so paths align
+        projectBaseDir: ${{ matrix.project }}
         args: >
           -Dsonar.projectKey=${{ matrix.project }}
           -Dsonar.organization=unarix
           -Dsonar.sources=.
-          -Dsonar.tests=${{ matrix.project }}/tests
-          -Dsonar.cfamily.compile-commands=${{ matrix.project }}/bw-output/compile_commands.json
-          -Dsonar.cfamily.gcov.reportsPath=${{ matrix.project }}
+          -Dsonar.tests=tests
+          -Dsonar.cfamily.compile-commands=bw-output/compile_commands.json
+          -Dsonar.cfamily.gcov.reportsPath=.
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,${{ matrix.project }}/tests/**
 
     # Quality Gate
