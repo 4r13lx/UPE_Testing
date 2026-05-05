@@ -67,8 +67,8 @@ jobs:
           -Dsonar.organization=unarix
           -Dsonar.sources=${{ matrix.project }}/src
           -Dsonar.tests=${{ matrix.project }}/tests
-          -Dsonar.cfamily.build-wrapper-output=${{ matrix.project }}/bw-output
-          -Dsonar.cfamily.gcov.reportsPath=.
+          -Dsonar.cfamily.compile-commands=${{ matrix.project }}/bw-output/compile_commands.json
+          -Dsonar.cfamily.gcov.reportsPath=${{ matrix.project }}
           -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json
 
     # Quality Gate
