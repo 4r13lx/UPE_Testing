@@ -41,12 +41,15 @@ jobs:
         ls -la build-wrapper-linux-x86
 
     # Build the project with build-wrapper to capture compilation data
-    - name: Build and Test with wrapper
+    - name: Build with wrapper
       run: |
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
         --out-dir bw-output \
         ls -la
-        make clean test
+        make clean all
+
+    - name: Run tests
+      run: make -C test
 
     # Generate coverage data
     - name: Generate coverage report
