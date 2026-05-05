@@ -65,7 +65,7 @@ jobs:
         args: >
           -Dsonar.projectKey=${{ matrix.project }}
           -Dsonar.organization=unarix
-          -Dsonar.sources=${{ matrix.project }}
+          -Dsonar.sources=.
           -Dsonar.tests=${{ matrix.project }}/tests
           -Dsonar.cfamily.compile-commands=${{ matrix.project }}/bw-output/compile_commands.json
           -Dsonar.cfamily.gcov.reportsPath=${{ matrix.project }}
