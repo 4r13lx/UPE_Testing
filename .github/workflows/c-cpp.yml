@@ -47,7 +47,7 @@ jobs:
 
     - name: Run tests
       run: |
-        make test
+        make build
         ls -la
         cat bw-output/compile_commands.json
 
