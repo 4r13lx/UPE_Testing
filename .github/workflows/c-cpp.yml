@@ -98,4 +98,4 @@ jobs:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
-        scanMetadataReportFile: ${{ matrix.project }}/.scannerwork/report-task.txt
+        scanMetadataReportFile: .scannerwork/report-task.txt
