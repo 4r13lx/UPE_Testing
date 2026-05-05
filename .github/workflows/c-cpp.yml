@@ -60,11 +60,11 @@ jobs:
         args: >
           -Dsonar.projectKey=${{ matrix.project }}
           -Dsonar.organization=unarix
-          -Dsonar.sources=.
-          -Dsonar.tests=.
+          -Dsonar.sources=src
+          -Dsonar.tests=tests
           -Dsonar.cfamily.build-wrapper-output=bw-output
           -Dsonar.cfamily.gcov.reportsPath=.
-          -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json,**/*.test.yml
+          -Dsonar.exclusions=**/README.md,**/build-wrapper-dump.json
 
     # Quality Gate
     - name: SonarQube Quality Gate
