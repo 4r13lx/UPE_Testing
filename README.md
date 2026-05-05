@@ -1,5 +1,7 @@
 # 📘 Práctica de Testing en C
 
+![Global CI](https://github.com/TU_USUARIO/TU_REPO/actions/workflows/c-cpp.yml/badge.svg)
+
 ### 🔹 Descripción
 Repositorio práctico en C que incluye funciones básicas, tests unitarios y un pipeline completo de CI/CD con GitHub Actions, análisis con SonarQube y despliegues automatizados.
 
