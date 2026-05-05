@@ -48,8 +48,19 @@
 .tmp_versions/
 modules.order
 Module.symvers
+
+# Binarios generados localmente
+*/src/*
+!*/src/*.c
+!*/src/*.h
+*/tests/*
+!*/tests/*.c
 Mkfile.old
 dkms.conf
+*/build/
+*/bin/
 
 # debug information files
 *.dwo
+
+.fake
