@@ -44,8 +44,8 @@ jobs:
         ./build-wrapper-linux-x86/build-wrapper-linux-x86-64 \
         --out-dir bw-output \
         ls -la
-        gcc -c tests/*.c -Iinclude
-       # make clean all test
+        make clean all
+        make build
 
     - name: Run tests
       run: |
