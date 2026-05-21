@@ -43,6 +43,27 @@ Este repositorio simula un flujo de trabajo real, permitiendo a los alumnos comp
 > Escribir código en C es solo el comienzo — asegurar su calidad, correcto funcionamiento y entrega continua es lo que define el desarrollo profesional de software.
 
 
+## 🐳 Distribución del Contenedor Docker
+
+Este repositorio cuenta con pipelines automatizados de Integración Continua (CI) y Despliegue Continuo (CD) encargados de compilar, validar y desplegar el proyecto ante cada cambio realizado en el repositorio.
+
+Cuando el flujo de Integración Continua finaliza correctamente — compilando el código fuente y ejecutando satisfactoriamente todos los tests automatizados — se activa automáticamente el flujo de Despliegue Continuo. Este proceso genera y publica una imagen Docker que contiene tanto el código fuente del repositorio como los artefactos compilados.
+
+El contenedor puede descargarse y ejecutarse localmente en tu máquina, permitiéndote:
+
+- Explorar el código fuente
+- Revisar y ejecutar los tests unitarios
+- Compilar los ejercicios
+- Validar el funcionamiento del proyecto
+- Realizar pruebas y modificaciones en un entorno aislado
+
+Podés descargar las imágenes desde el repositorio oficial de paquetes Docker en GitHub:
+
+👉 [Repositorio Docker](https://github.com/users/4r13lx/packages/container/package/upe_testing)
+
+Se recomienda utilizar la última versión disponible, ya que contiene los cambios más recientes, correcciones y funcionalidades validadas automáticamente por los pipelines del proyecto.
+
+
 ---
 
 
@@ -88,3 +109,24 @@ This repository simulates a real-world development workflow, helping students un
 
 ### 💡 Key Takeaway
 > Writing C code is just the beginning — ensuring its correctness, quality, and continuous delivery is what defines professional software development.
+
+
+## 🐳 Docker Container Distribution
+
+This repository includes automated CI/CD pipelines responsible for compiling, validating, and deploying the project on every change pushed to the repository.
+
+Whenever the Continuous Integration (CI) workflow completes successfully — meaning the source code compiles correctly and all automated tests pass — the Continuous Deployment (CD) workflow is triggered automatically. This process generates and publishes a Docker container containing the repository source code and compiled artifacts.
+
+The container can be downloaded and executed locally on your machine, allowing you to:
+
+- Explore the source code
+- Review and execute unit tests
+- Compile the exercises
+- Validate the project behavior
+- Experiment freely in an isolated environment
+
+You can download the container images from the official GitHub Container Registry:
+
+👉 [Docker Package Repository](https://github.com/users/4r13lx/packages/container/package/upe_testing)
+
+It is recommended to use the latest available image version, as it contains the most recent changes, fixes, and validated functionality.
