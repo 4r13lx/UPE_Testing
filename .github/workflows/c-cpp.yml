@@ -18,7 +18,7 @@ jobs:
     # Define a matrix to run the job for each project
     strategy:
       matrix:
-        project: [ano_bisiesto]
+        project: [ano_bisiesto, maximo_comun_divisor]
 
     # Set the working directory for all steps in this job
     defaults:
