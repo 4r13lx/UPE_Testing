@@ -1,5 +1,5 @@
 # Imagen base minima
-FROM alpine:latest
+FROM alpine:3.22
 
 # Instalacion de herramientas necesarias
 RUN apk add --no-cache \
