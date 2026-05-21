@@ -1,0 +1,47 @@
+name: C CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["C CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+
+  docker:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate image tag
+        id: tag
+        run: |
+          echo "TAG=$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
+
+      - name: Login to GHCR
+        run: |
+          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t ghcr.io/${{ github.repository_owner }}/upe_testing:latest \
+            -t ghcr.io/${{ github.repository_owner }}/upe_testing:${{ steps.tag.outputs.TAG }} \
+            .
+
+      - name: Push latest image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/upe_testing:latest
+
+      - name: Push versioned image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/upe_testing:${{ steps.tag.outputs.TAG }}
