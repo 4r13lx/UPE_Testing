@@ -34,6 +34,9 @@ El ejercicio debe resolverse exclusivamente utilizando **C ANSI**.
 - Funciones.
 - Operadores aritméticos, relacionales y lógicos.
 - `printf` y `scanf` si fueran necesarios para una aplicación de prueba.
+- Vectores.
+- Matrices.
+- `struct`.
 
 ### No está permitido
 
@@ -42,10 +45,7 @@ El ejercicio debe resolverse exclusivamente utilizando **C ANSI**.
 - Unity, CUnit, Google Test u otros frameworks.
 - `stdbool.h`.
 - Tipo `bool`.
-- Vectores.
-- Matrices.
 - Punteros.
-- `struct`.
 - Memoria dinámica.
 - Archivos.
 - Variables globales utilizadas para almacenar resultados.
@@ -78,7 +78,7 @@ La función debe devolver un código entero que represente el resultado de la op
 
 ---
 
-# 4. Reglas del negocio
+# 4. Restricciones en los datos de ingreso
 
 Los parámetros tienen las siguientes restricciones:
 
@@ -90,7 +90,7 @@ Los parámetros tienen las siguientes restricciones:
 
 ---
 
-# 5. Reglas para determinar el resultado
+# 5. Reglas de negocio
 
 La función deberá aplicar las siguientes reglas en el orden indicado.
 
@@ -191,7 +191,7 @@ Calcule la **complejidad ciclomática** del programa.
 
 Utilice el siguientes y único método visto en clase:
 
-### Método 1
+### Según el método visto en clase
 
 ```text
 CC = A - N + 2
@@ -311,7 +311,6 @@ Diseñe un conjunto de casos de prueba utilizando:
 
 - Clases de equivalencia.
 - Análisis de valores límite.
-- Reglas de negocio.
 
 Utilice:
 
@@ -342,14 +341,6 @@ Probar las condiciones inmediatamente antes, exactamente en el límite e inmedia
 
 Debe existir al menos un caso que alcance cada código de retorno posible.
 
-### D. Condiciones compuestas
-
-Diseñar casos donde cambie una sola condición de una expresión compuesta mientras las demás permanecen constantes.
-
-### E. Combinaciones
-
-Identificar combinaciones que puedan producir comportamientos diferentes aun cuando individualmente pertenezcan a la misma clase de equivalencia.
-
 ---
 
 # 16. Actividad 10 — Implementación de pruebas unitarias
@@ -361,28 +352,26 @@ No se permite utilizar ningún framework.
 Se debe implementar manualmente una estructura similar a:
 
 ```c
-void ejecutar_prueba(
-    int id,
-    int entrada1,
-    int entrada2,
-    int entrada3,
-    int entrada4,
-    int entrada5,
-    int esperado
-)
+void test()
 {
-    int resultado;
+    // Resultado y evaluación
+    int resultado = 0;          // Esto es un ejemplo, se puede recibir otro tipo de valor
+    int resultado_esperado = 0; // Esto es un ejemplo, se puede recibir otro tipo de valor
 
-    resultado = /* llamada a la función bajo prueba */;
+    // Variables que contendrá los valores a pasar como argumentos
+    int arg1 = /* valor del argumento 1 que recibirá la función */;
+    int arg2 = /* valor del argumento 2 que recibirá la función */;
+    int arg3 = /* valor del argumento 3 que recibirá la función */;
+    
+    resultado = /* llamada a la función bajo prueba (Ej: clasificar_envio(arg1, arg2, arg3))*/;
 
     if (resultado == esperado)
     {
-        printf("PASS - Caso %d\n", id);
+        printf("OK - Caso %d\n", id);
     }
     else
     {
-        printf("FAIL - Caso %d - Esperado: %d - Obtenido: %d\n",
-               id, esperado, resultado);
+        printf("ERROR - Caso %d - Esperado: %d - Obtenido: %d\n", id, esperado, resultado);
     }
 }
 ```
@@ -391,39 +380,7 @@ void ejecutar_prueba(
 
 ---
 
-# 17. Restricciones adicionales para las pruebas
-
-El código de testing tampoco podrá utilizar:
-
-- `bool`
-- vectores
-- matrices
-- punteros
-- `struct`
-- frameworks
-- librerías externas
-
-Por lo tanto, no se podrá implementar algo como:
-
-```c
-int casos[100];
-```
-
-ni:
-
-```c
-struct CasoPrueba
-{
-    int entrada1;
-    int entrada2;
-};
-```
-
-El objetivo es que cada prueba sea explícita y comprensible.
-
----
-
-# 18. Actividad 11 — Ejecución y reporte
+# 17. Actividad 11 — Ejecución y reporte
 
 El programa de pruebas deberá mostrar como mínimo:
 
@@ -447,7 +404,7 @@ El estudiante deberá incluir evidencia de ejecución.
 
 ---
 
-# 19. Actividad 12 — Análisis de cobertura
+# 18. Actividad 12 — Análisis de cobertura
 
 A partir de los casos diseñados, determinar:
 
